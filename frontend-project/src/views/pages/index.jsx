@@ -6,4 +6,5 @@ export { default as Department } from "./Department";
 export { default as Position } from "./Position";
 export { default as Salary } from "./Salary";
 export { default as Reports } from "./Reports";
+export { default as Account } from "./Account";
 export { default as NotFound } from "./NotFound";

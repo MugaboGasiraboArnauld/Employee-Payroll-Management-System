@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { Login, Register, Dashboard, Employee, Department, Position, Salary, Reports, NotFound } from "./views/pages";
+import { Login, Register, Dashboard, Employee, Department, Position, Salary, Reports, Account, NotFound } from "./views/pages";
 import { Nav, TopBar, ProtectedRoutes } from "./views/components";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import "./styles/theme.css";
@@ -28,6 +28,7 @@ const Layout = () => {
               <Route path="/positions" element={<Position />} />
               <Route path="/salaries" element={<Salary />} />
               <Route path="/reports" element={<Reports />} />
+              <Route path="/account" element={<Account />} />
             </Route>
             <Route path="/*" element={<NotFound />} />
           </Routes>

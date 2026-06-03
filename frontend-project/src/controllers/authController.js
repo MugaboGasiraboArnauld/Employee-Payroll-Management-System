@@ -27,3 +27,13 @@ export const checkAuth = async () => {
   const res = await api.get("/auth/me");
   return res.data;
 };
+
+export const fetchAccount = async () => {
+  const res = await api.get("/auth/account");
+  return res.data;
+};
+
+export const updatePassword = async (currentPassword, newPassword) => {
+  const res = await api.put("/auth/account", { currentPassword, newPassword });
+  return res.data;
+};

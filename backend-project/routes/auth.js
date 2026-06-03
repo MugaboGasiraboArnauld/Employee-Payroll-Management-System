@@ -49,4 +49,37 @@ router.get('/me', (req, res) => {
   res.json({ userId: req.session.userId });
 });
 
+router.get('/account', async (req, res) => {
+  if (!req.session.userId) return res.status(401).json({ message: 'Not logged in' });
+  try {
+    const user = await User.findById(req.session.userId).populate('employee');
+    if (!user) return res.status(404).json({ message: 'User not found!' });
+    res.json({
+      username: user.username,
+      employee: user.employee ? `${user.employee.firstName} ${user.employee.lastName}` : null,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/account', async (req, res) => {
+  if (!req.session.userId) return res.status(401).json({ message: 'Not logged in' });
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) return res.status(400).json({ message: 'All fields are required!' });
+    if (newPassword.length < 6) return res.status(400).json({ message: 'Password must be at least 6 characters!' });
+    const user = await User.findById(req.session.userId);
+    if (!user) return res.status(404).json({ message: 'User not found!' });
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) return res.status(403).json({ message: 'Current password is incorrect!' });
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+    res.json({ message: 'Password updated successfully!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;

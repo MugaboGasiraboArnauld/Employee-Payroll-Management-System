@@ -11,6 +11,7 @@ const Nav = ({ mobileOpen, setMobileOpen }) => {
     { path: "/positions", label: "Positions" },
     { path: "/salaries", label: "Salaries" },
     { path: "/reports", label: "Reports" },
+    { path: "/account", label: "Account" },
   ];
 
   const navContent = (
