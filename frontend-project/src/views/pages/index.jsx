@@ -1,0 +1,9 @@
+export { default as Login } from "./Login";
+export { default as Register } from "./Register";
+export { default as Dashboard } from "./Dashboard";
+export { default as Employee } from "./Employee";
+export { default as Department } from "./Department";
+export { default as Position } from "./Position";
+export { default as Salary } from "./Salary";
+export { default as Reports } from "./Reports";
+export { default as NotFound } from "./NotFound";
